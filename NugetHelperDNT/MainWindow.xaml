@@ -6,7 +6,19 @@
         xmlns:local="clr-namespace:NugetHelperDNT"
         mc:Ignorable="d"
         Title="DNT Nuget Switcher UI" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="TbTargetSolutionPath" Width="100"></TextBox>
+                <Button>Open target file</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="TbSourceSolutionPath" Width="100"></TextBox>
+                <Button>Open source file</Button>
+            </StackPanel>
+        </StackPanel>
+        <DockPanel DockPanel.Dock="Left">
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Right"></DockPanel>
+    </DockPanel>
 </Window>
