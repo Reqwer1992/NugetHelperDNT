@@ -34,14 +34,14 @@
             this.btnGenerateContent = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.pnlTarget = new System.Windows.Forms.Panel();
-            this.pnlSelectedProjects = new System.Windows.Forms.GroupBox();
-            this.selectedSourceDependencies = new System.Windows.Forms.TreeView();
             this.splSelectedFound = new System.Windows.Forms.Splitter();
             this.pnlFoundProjects = new System.Windows.Forms.GroupBox();
             this.foundSourceDependencies = new System.Windows.Forms.TreeView();
             this.splFoundNotFound = new System.Windows.Forms.Splitter();
             this.pnlNotFoundProjects = new System.Windows.Forms.GroupBox();
             this.notFoundSourceDependencies = new System.Windows.Forms.TreeView();
+            this.pnlSelectedProjects = new System.Windows.Forms.GroupBox();
+            this.selectedSourceDependencies = new System.Windows.Forms.TreeView();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnLoadSourceProject = new System.Windows.Forms.Button();
             this.btnOpenSourceFile = new System.Windows.Forms.Button();
@@ -55,9 +55,9 @@
             this.pnlPreview.SuspendLayout();
             this.pnlDntButtons.SuspendLayout();
             this.pnlTarget.SuspendLayout();
-            this.pnlSelectedProjects.SuspendLayout();
             this.pnlFoundProjects.SuspendLayout();
             this.pnlNotFoundProjects.SuspendLayout();
+            this.pnlSelectedProjects.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlSourceProjects.SuspendLayout();
             this.SuspendLayout();
@@ -110,45 +110,26 @@
             this.txtContent.Location = new System.Drawing.Point(0, 0);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
+            this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtContent.Size = new System.Drawing.Size(834, 111);
             this.txtContent.TabIndex = 0;
             // 
             // pnlTarget
             // 
-            this.pnlTarget.Controls.Add(this.pnlSelectedProjects);
             this.pnlTarget.Controls.Add(this.splSelectedFound);
             this.pnlTarget.Controls.Add(this.pnlFoundProjects);
             this.pnlTarget.Controls.Add(this.splFoundNotFound);
             this.pnlTarget.Controls.Add(this.pnlNotFoundProjects);
+            this.pnlTarget.Controls.Add(this.pnlSelectedProjects);
             this.pnlTarget.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlTarget.Location = new System.Drawing.Point(0, 76);
             this.pnlTarget.Name = "pnlTarget";
             this.pnlTarget.Size = new System.Drawing.Size(439, 389);
             this.pnlTarget.TabIndex = 1;
             // 
-            // pnlSelectedProjects
-            // 
-            this.pnlSelectedProjects.Controls.Add(this.selectedSourceDependencies);
-            this.pnlSelectedProjects.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSelectedProjects.Location = new System.Drawing.Point(0, 0);
-            this.pnlSelectedProjects.Name = "pnlSelectedProjects";
-            this.pnlSelectedProjects.Size = new System.Drawing.Size(439, 133);
-            this.pnlSelectedProjects.TabIndex = 3;
-            this.pnlSelectedProjects.TabStop = false;
-            this.pnlSelectedProjects.Text = "Selected dependencies";
-            // 
-            // selectedSourceDependencies
-            // 
-            this.selectedSourceDependencies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedSourceDependencies.Location = new System.Drawing.Point(3, 19);
-            this.selectedSourceDependencies.Name = "selectedSourceDependencies";
-            this.selectedSourceDependencies.ShowNodeToolTips = true;
-            this.selectedSourceDependencies.Size = new System.Drawing.Size(433, 111);
-            this.selectedSourceDependencies.TabIndex = 0;
-            // 
             // splSelectedFound
             // 
-            this.splSelectedFound.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splSelectedFound.Dock = System.Windows.Forms.DockStyle.Top;
             this.splSelectedFound.Location = new System.Drawing.Point(0, 133);
             this.splSelectedFound.Name = "splSelectedFound";
             this.splSelectedFound.Size = new System.Drawing.Size(439, 5);
@@ -158,10 +139,10 @@
             // pnlFoundProjects
             // 
             this.pnlFoundProjects.Controls.Add(this.foundSourceDependencies);
-            this.pnlFoundProjects.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFoundProjects.Location = new System.Drawing.Point(0, 138);
+            this.pnlFoundProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFoundProjects.Location = new System.Drawing.Point(0, 133);
             this.pnlFoundProjects.Name = "pnlFoundProjects";
-            this.pnlFoundProjects.Size = new System.Drawing.Size(439, 114);
+            this.pnlFoundProjects.Size = new System.Drawing.Size(439, 119);
             this.pnlFoundProjects.TabIndex = 2;
             this.pnlFoundProjects.TabStop = false;
             this.pnlFoundProjects.Text = "Dependencies found in source projects";
@@ -172,7 +153,7 @@
             this.foundSourceDependencies.Location = new System.Drawing.Point(3, 19);
             this.foundSourceDependencies.Name = "foundSourceDependencies";
             this.foundSourceDependencies.ShowNodeToolTips = true;
-            this.foundSourceDependencies.Size = new System.Drawing.Size(433, 92);
+            this.foundSourceDependencies.Size = new System.Drawing.Size(433, 97);
             this.foundSourceDependencies.TabIndex = 0;
             // 
             // splFoundNotFound
@@ -204,6 +185,26 @@
             this.notFoundSourceDependencies.Size = new System.Drawing.Size(433, 110);
             this.notFoundSourceDependencies.TabIndex = 0;
             // 
+            // pnlSelectedProjects
+            // 
+            this.pnlSelectedProjects.Controls.Add(this.selectedSourceDependencies);
+            this.pnlSelectedProjects.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSelectedProjects.Location = new System.Drawing.Point(0, 0);
+            this.pnlSelectedProjects.Name = "pnlSelectedProjects";
+            this.pnlSelectedProjects.Size = new System.Drawing.Size(439, 133);
+            this.pnlSelectedProjects.TabIndex = 3;
+            this.pnlSelectedProjects.TabStop = false;
+            this.pnlSelectedProjects.Text = "Selected dependencies";
+            // 
+            // selectedSourceDependencies
+            // 
+            this.selectedSourceDependencies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectedSourceDependencies.Location = new System.Drawing.Point(3, 19);
+            this.selectedSourceDependencies.Name = "selectedSourceDependencies";
+            this.selectedSourceDependencies.ShowNodeToolTips = true;
+            this.selectedSourceDependencies.Size = new System.Drawing.Size(433, 111);
+            this.selectedSourceDependencies.TabIndex = 0;
+            // 
             // pnlTop
             // 
             this.pnlTop.Controls.Add(this.btnLoadSourceProject);
@@ -223,7 +224,7 @@
             this.btnLoadSourceProject.Name = "btnLoadSourceProject";
             this.btnLoadSourceProject.Size = new System.Drawing.Size(131, 22);
             this.btnLoadSourceProject.TabIndex = 3;
-            this.btnLoadSourceProject.Text = "Add target projects";
+            this.btnLoadSourceProject.Text = "Add source solution";
             this.btnLoadSourceProject.UseVisualStyleBackColor = true;
             this.btnLoadSourceProject.Click += new System.EventHandler(this.btnLoadSourceProject_Click);
             // 
@@ -233,7 +234,7 @@
             this.btnOpenSourceFile.Name = "btnOpenSourceFile";
             this.btnOpenSourceFile.Size = new System.Drawing.Size(106, 23);
             this.btnOpenSourceFile.TabIndex = 2;
-            this.btnOpenSourceFile.Text = "Open target solution";
+            this.btnOpenSourceFile.Text = "Load target solution";
             this.btnOpenSourceFile.UseVisualStyleBackColor = true;
             this.btnOpenSourceFile.Click += new System.EventHandler(this.btnOpenTargetFile_Click);
             // 
@@ -315,9 +316,9 @@
             this.pnlPreview.PerformLayout();
             this.pnlDntButtons.ResumeLayout(false);
             this.pnlTarget.ResumeLayout(false);
-            this.pnlSelectedProjects.ResumeLayout(false);
             this.pnlFoundProjects.ResumeLayout(false);
             this.pnlNotFoundProjects.ResumeLayout(false);
+            this.pnlSelectedProjects.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlSourceProjects.ResumeLayout(false);

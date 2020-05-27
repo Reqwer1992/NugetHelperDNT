@@ -1,31 +1,21 @@
-﻿namespace NugetHelperDntUI.Model
+﻿using System;
+
+namespace NugetHelperDntUI.Model
 {
     public class TargetDependency: IPresentableProject
     {
         public string ProjectName { get; set; }
 
-        public string ProjectGuid { get; set; }
-
-        public bool IsFound { get; set; }
-
-        public TargetDependency(string guid)
-        {
-            ProjectGuid = guid;
-        }
+        public Version? Version { get; set; }
 
         public override string ToString()
         {
-            if (IsFound)
-            {
-                return $"{ProjectName}";
-            } 
-
-            return $"{ProjectName} {ProjectGuid}";
+            return ProjectName;
         }
 
         public string ToolTipText()
         {
-            return $"{ProjectName} {ProjectGuid}";
+            return $"{ProjectName} {Version?.ToString()}";
         }
     }
 }

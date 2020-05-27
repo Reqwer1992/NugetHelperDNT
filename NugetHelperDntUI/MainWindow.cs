@@ -16,7 +16,7 @@ namespace NugetHelperDntUI
         private DntRunner dntRunner;
         private SwitcherFileCreator switcherFileCreator;
 
-        private IEnumerable<TargetProject> TargetProject = new List<TargetProject>();
+        private IEnumerable<TargetProject> TargetProjects = new List<TargetProject>();
 
         public MainWindow()
         {
@@ -44,13 +44,13 @@ namespace NugetHelperDntUI
 
         private void PopulateTargetProjectList(string solutionPath)
         {
-            var TargetProject = projectParser.GetTargetProjectsFromSolution(solutionPath);
+            TargetProjects = projectParser.GetTargetProjectsFromSolution(solutionPath);
             
             notFoundSourceDependencies.Nodes.Clear();
             foundSourceDependencies.Nodes.Clear();
             selectedSourceDependencies.Nodes.Clear();
 
-            foreach(var project in TargetProject)
+            foreach(var project in TargetProjects)
             {
                 notFoundSourceDependencies.AddProjectNodes(project.ProjectName, project.Dependencies);
             }
@@ -70,20 +70,6 @@ namespace NugetHelperDntUI
             var projects = projectParser.GetProjectsFromSolution(solutionPath);
 
             sourceProjects.AddProjectNodes(Path.GetFileName(solutionPath), projects);
-            /*sourceProjects.BeginUpdate();
-            try
-            {                
-                var node = sourceProjects.Nodes.Add(Path.GetFileName(solutionPath));
-                foreach(var project in projects)
-                {
-                    var newNode = node.Nodes.Add(project.ToString());
-                    newNode.Tag = project;
-                }
-            }
-            finally
-            {
-                sourceProjects.EndUpdate();
-            }*/
         }
 
         private void btnGenerateContent_Click(object sender, EventArgs e)
@@ -122,7 +108,65 @@ namespace NugetHelperDntUI
                     sourceProjects.Enabled = true;
                 }
 
+                SetFoundAndSelectedProjects();
                 RegenerateContent();
+            }
+        }
+
+        private void SetFoundAndSelectedProjects()
+        {
+            var allProjects = sourceProjects.Nodes.Descendants().Where(x => x.Tag is SourceProject);
+            var foundProjects = new Dictionary<string, List<TargetDependency>>();
+            var selectProjects = new Dictionary<string, List<TargetDependency>>();
+
+            foreach (var targetProject in TargetProjects) {
+                var foundDependencies = new List<TargetDependency>();
+                var selectedDependencies = new List<TargetDependency>();
+                foundDependencies.AddRange(targetProject.Dependencies.Where(x => allProjects.Any(y => (y.Tag as SourceProject).ProjectName == x.ProjectName)).ToList());
+                selectedDependencies.AddRange(targetProject.Dependencies.Where(x => allProjects.Any(y => y.Checked && (y.Tag as SourceProject).ProjectName == x.ProjectName)).ToList());
+                foundProjects.Add(targetProject.ProjectName, foundDependencies);
+                selectProjects.Add(targetProject.ProjectName, selectedDependencies);
+            }
+            //var foundProjects = TargetProjects.Where(x => allProjects.Any(y => (y.Tag as SourceProject).ProjectName == x.ProjectName)).ToList();
+            //var selectProjects = TargetProjects.Where(x => allProjects.Any(y => y.Checked && (y.Tag as SourceProject).ProjectName == x.ProjectName)).ToList();
+
+            foundSourceDependencies.Nodes.Clear();
+            foreach (var project in foundProjects)
+            {
+                var projectNode = new TreeNode();
+                projectNode.Text = project.Key;
+                foreach (var dependency in project.Value)
+                {
+                    var dependencyNode = new TreeNode();
+                    dependencyNode.Text = dependency.ProjectName;
+                    dependencyNode.Tag = dependency;
+                    projectNode.Nodes.Add(dependencyNode);
+                }
+
+                if (projectNode.Nodes.Count > 0)
+                {
+                    foundSourceDependencies.Nodes.Add(projectNode);
+                }                
+            }
+
+            selectedSourceDependencies.Nodes.Clear();
+            foreach (var project in selectProjects)
+            {
+                var projectNode = new TreeNode();
+                projectNode.Text = project.Key;
+                foreach (var dependency in project.Value)
+                {
+                    var dependencyNode = new TreeNode();
+                    dependencyNode.Text = dependency.ProjectName;
+                    dependencyNode.Tag = dependency;
+                    dependencyNode.Checked = true;
+                    projectNode.Nodes.Add(dependencyNode);
+                }
+
+                if (projectNode.Nodes.Count > 0)
+                {
+                    selectedSourceDependencies.Nodes.Add(projectNode);
+                }                
             }
         }
 
